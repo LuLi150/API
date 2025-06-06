@@ -1,0 +1,11 @@
+{
+  "name": "api",
+  "main": "./src/serve.js",
+  "type": "module",
+  "scripts": {
+   "dev": "node --watch ./src/serve.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

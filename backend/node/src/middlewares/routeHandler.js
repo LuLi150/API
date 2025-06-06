@@ -1,0 +1,23 @@
+import { routes } from "../routes.js"
+
+export const routeHandler = (request, response) => {
+
+  const route = routes.find(route => {
+    return route.method === request.method && route.path.test(request.url);
+  });
+
+  if(route){
+    const routeParams = request.url.match(route.path);
+
+    const { ...params } = routeParams.groups;
+
+   request.params = params;
+
+   console.log(routeParams);
+   
+
+    return route.controller(request, response);
+  }
+
+  return response.writeHead(400).end("Erro! O servido não pôde processa a requisição")
+}
