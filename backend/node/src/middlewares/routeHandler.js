@@ -1,4 +1,7 @@
-import { routes } from "../routes.js"
+import { routes } from "../routes.js";
+import { Database } from "../database.js";
+
+const database = new Database();
 
 export const routeHandler = (request, response) => {
 
@@ -12,11 +15,8 @@ export const routeHandler = (request, response) => {
     const { ...params } = routeParams.groups;
 
    request.params = params;
-
-   console.log(routeParams);
    
-
-    return route.controller(request, response);
+    return route.controller({request, response, database});
   }
 
   return response.writeHead(400).end("Erro! O servido não pôde processa a requisição")
